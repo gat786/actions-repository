@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -20,19 +20,15 @@ jobs:
 
     - name: Create Python Virtual Environment
       shell: bash
-      env:
-        ACTIVATE_SCRIPT: if {{ runner.os }} == 'Windows' {echo ".venv/Scripts/activate" } else { echo "source .venv/bin/activate" }
       run: |
         python3 -m venv .venv
-        ${{ env.ACTIVATE_SCRIPT }}
+        source .venv/bin/activate
         pip install -r requirements.txt
     
     - name: Build the application
       shell: bash
-      env:
-        ACTIVATE_SCRIPT: if {{ runner.os }} == 'Windows' {echo ".venv/Scripts/activate" } else { echo "source .venv/bin/activate" }
       run: |
-        ${{ env.ACTIVATE_SCRIPT }}
+        source .venv/bin/activate
         pyinstaller src/main.py --onefile
     
     - name: Archive the build
