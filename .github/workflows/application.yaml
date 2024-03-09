@@ -1,0 +1,27 @@
+name: Play with Application
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create Python Virtual Environment
+      run: |
+        python3 -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+    
+    - name: Run Application
+      run: |
+        source .venv/bin/activate
+        python src/main.py
