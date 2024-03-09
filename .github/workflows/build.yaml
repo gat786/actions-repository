@@ -24,4 +24,4 @@ jobs:
     - name: Build the application
       run: |
         source .venv/bin/activate
-        python -m pyinstaller src/main.py --onefile
+        pyinstaller src/main.py --onefile
