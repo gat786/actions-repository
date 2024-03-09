@@ -20,15 +20,19 @@ jobs:
 
     - name: Create Python Virtual Environment
       shell: bash
+      env:
+        ACTIVATE_SCRIPT: if {{ runner.os }} == 'Windows' {echo ".venv/Scripts/activate" } else { echo "source .venv/bin/activate" }
       run: |
         python3 -m venv .venv
-        source .venv/bin/activate
+        ${{ env.ACTIVATE_SCRIPT }}
         pip install -r requirements.txt
     
     - name: Build the application
       shell: bash
+      env:
+        ACTIVATE_SCRIPT: if {{ runner.os }} == 'Windows' {echo ".venv/Scripts/activate" } else { echo "source .venv/bin/activate" }
       run: |
-        source .venv/bin/activate
+        ${{ env.ACTIVATE_SCRIPT }}
         pyinstaller src/main.py --onefile
     
     - name: Archive the build
