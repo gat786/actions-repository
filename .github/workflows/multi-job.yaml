@@ -1,0 +1,44 @@
+name: Multi-Stage (Jobs) GH Action
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  linux_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: build for linux
+        env:
+          GOOS: linux
+        working-directory: src_go
+        run: |
+          go build
+  
+  windows_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: build for linux
+        env:
+          GOOS: windows
+        working-directory: src_go
+        run: |
+          go build
+                  
+  macos_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: build for linux
+        env:
+          GOOS: macos
+        working-directory: src_go
+        run: |
+          go build
