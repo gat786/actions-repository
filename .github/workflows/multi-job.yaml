@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-      - name: build for linux
+      - name: build for windows
         env:
           GOOS: windows
         working-directory: src-go
@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-      - name: build for linux
+      - name: build for macos
         env:
           GOOS: darwin
         working-directory: src-go
