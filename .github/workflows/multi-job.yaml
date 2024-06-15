@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v4
       - name: build for linux
         env:
-          GOOS: macos
+          GOOS: darwin
         working-directory: src-go
         run: |
           go build
