@@ -17,7 +17,7 @@ jobs:
           GOOS: linux
         working-directory: src-go
         run: |
-          go build
+          go build -o build/linux-hello
   
   windows_build:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
           GOOS: windows
         working-directory: src-go
         run: |
-          go build
+          go build -o build/windows-hello.exe
                   
   macos_build:
     runs-on: ubuntu-latest
@@ -41,4 +41,10 @@ jobs:
           GOOS: darwin
         working-directory: src-go
         run: |
-          go build
+          go build -o build/macos-hello
+  
+  archive_results:
+    runs-on: ubuntu-latest
+    steps:
+      - name: archive-build-files
+        run: ls -al -R
