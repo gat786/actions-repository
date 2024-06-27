@@ -9,6 +9,8 @@ on:
 jobs:
   linux_build:
     runs-on: ubuntu-latest
+    env:
+      file_path: build/linux-hello
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -17,10 +19,17 @@ jobs:
           GOOS: linux
         working-directory: src-go
         run: |
-          go build -o build/linux-hello
+          go build -o $file_path
+      - name: upload archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux.zip
+          path: ${{ env.file_path }}
   
   windows_build:
     runs-on: ubuntu-latest
+    env:
+      file_path: build/windows-hello.exe
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -29,10 +38,17 @@ jobs:
           GOOS: windows
         working-directory: src-go
         run: |
-          go build -o build/windows-hello.exe
+          go build -o $file_path
+      - name: upload archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows.zip
+          path: ${{ env.file_path }}
                   
   macos_build:
     runs-on: ubuntu-latest
+    env:
+      file_path: build/macos-hello
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -41,7 +57,12 @@ jobs:
           GOOS: darwin
         working-directory: src-go
         run: |
-          go build -o build/macos-hello
+          go build -o $file_path
+      - name: upload archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos.zip
+          path: ${{ env.file_path }}
   
   archive_results:
     runs-on: ubuntu-latest
@@ -50,5 +71,13 @@ jobs:
       - linux_build
       - windows_build
     steps:
-      - name: archive-build-files
-        run: ls -al -R
+      - name: download archives
+        uses: actions/download-artifact@v4
+      - name: list artifacts
+        run: |
+          ls -al
+      - name: upload artifact together
+        uses: actions/upload-artifact@v4
+        with: 
+          name: combined.zip
+          path: .
