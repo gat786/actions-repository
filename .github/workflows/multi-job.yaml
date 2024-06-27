@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: linux.zip
-          path: ${{ env.file_path }}
+          path: src-go/${{ env.file_path }}
   
   windows_build:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows.zip
-          path: ${{ env.file_path }}
+          path: src-go/${{ env.file_path }}
                   
   macos_build:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: macos.zip
-          path: ${{ env.file_path }}
+          path: src-go/${{ env.file_path }}
   
   archive_results:
     runs-on: ubuntu-latest
