@@ -23,7 +23,7 @@ jobs:
       - name: upload archive
         uses: actions/upload-artifact@v4
         with:
-          name: linux.zip
+          name: linux
           path: src-go/${{ env.file_path }}
   
   windows_build:
@@ -42,7 +42,7 @@ jobs:
       - name: upload archive
         uses: actions/upload-artifact@v4
         with:
-          name: windows.zip
+          name: windows
           path: src-go/${{ env.file_path }}
                   
   macos_build:
@@ -61,7 +61,7 @@ jobs:
       - name: upload archive
         uses: actions/upload-artifact@v4
         with:
-          name: macos.zip
+          name: macos
           path: src-go/${{ env.file_path }}
   
   archive_results:
@@ -79,5 +79,5 @@ jobs:
       - name: upload artifact together
         uses: actions/upload-artifact@v4
         with: 
-          name: combined.zip
+          name: combined
           path: .
