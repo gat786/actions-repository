@@ -1,0 +1,26 @@
+name: Outputs example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_output:
+    outputs:
+      NAME: ${{ steps.creator.outputs.NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create an output
+        id: creator
+        run: |
+          echo "NAME=Ganesh" >> $GITHUB_OUTPUTS
+    
+  subscriber:
+    needs: 
+      - create_output
+    runs-on: ubuntu-latest
+    steps:
+      - name: read output
+        env:
+          NAME: ${{ needs.create_output.outputs.NAME }}
+        run: |
+          echo "Output from previous step is: $NAME" 
