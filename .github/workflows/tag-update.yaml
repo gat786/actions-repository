@@ -14,7 +14,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Get Target Commit SHA
+        id: get_sha
+        run: echo "target_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Echo hello world
         run: |
