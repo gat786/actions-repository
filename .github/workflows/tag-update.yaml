@@ -7,6 +7,9 @@ name: Release Marked as stable
 
 jobs:
   tag-update:
+    permissions:
+      contents: read
+
     runs-on: ubuntu-latest
 
     steps:
