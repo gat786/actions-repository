@@ -1,0 +1,18 @@
+on:
+  release:
+    types:
+      - released
+
+name: Release Marked as stable
+
+jobs:
+  tag-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Echo hello world
+        run: |
+          echo "Hello, world! This is a release marked as stable."
