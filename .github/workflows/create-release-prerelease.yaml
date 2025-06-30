@@ -1,0 +1,28 @@
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Tag name for the release"
+        required: true
+        default: "v1.0.1"
+
+name: Create Release with Prerelease turned on
+
+jobs:
+  create-release-prerelease:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create release using GitHub CLI
+        run: |
+          gh release create ${{ github.event.inputs.tag_name }} \
+            --title "Release ${{ github.event.inputs.tag_name }}" \
+            --notes "This is a prerelease version." \
+            --prerelease
+          echo "Release ${{ github.event.inputs.tag_name }} created with prerelease status."
