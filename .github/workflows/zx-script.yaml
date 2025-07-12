@@ -17,10 +17,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Zx
+        working-directory: zx-scripts
         run: |
-          npm install zx
+          npm install
 
       - name: Run zx script
+        working-directory: zx-scripts
         run: |
-          chmod +x zx-scripts/getting-started.mjs
-          ./zx-scripts/getting-started.mjs
+          npm run test
