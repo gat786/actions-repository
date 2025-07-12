@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+name: Test Zx By Google
+
+jobs:
+  first-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Zx
+        run: |
+          npm install zx
+
+      - name: Run zx script
+        run: |
+          zx zx-scripts/getting-started.mjs
