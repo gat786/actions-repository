@@ -19,4 +19,5 @@ jobs:
 
       - name: Run zx script
         run: |
-          zx zx-scripts/getting-started.mjs
+          chmod +x zx-scripts/getting-started.mjs
+          ./zx-scripts/getting-started.mjs
