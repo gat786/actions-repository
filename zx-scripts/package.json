@@ -1,0 +1,17 @@
+{
+  "name": "zx-scripts",
+  "version": "1.0.0",
+  "description": "Folder where i test zx-scripts",
+  "main": "getting-started.mjs",
+  "scripts": {
+    "test": "zx getting-started.mjs"
+  },
+  "keywords": [
+    "Zx"
+  ],
+  "author": "Ganesh Tiwari",
+  "license": "ISC",
+  "dependencies": {
+    "zx": "^8.7.0"
+  }
+}
